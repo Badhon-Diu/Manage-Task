@@ -61,8 +61,21 @@ export default function Fulltable() {
   function handleFav(taskid) {
     console.log("handle Fev", taskid);
     const taskIndex = tasks.findIndex((task) => task.id === taskid);
-    console.log(taskIndex);
+
+    const newTasks = [...tasks];
+    newTasks[taskIndex].isFavorite = !newTasks[taskIndex].isFavorite;
+    setTasks(newTasks);
   }
+
+  function handleSearch(searchterm) {
+    console.log(searchterm);
+    const filterTask = tasks.filter((task) =>
+      task.title.toLocaleLowerCase().includes(searchterm.toLocaleLowerCase())
+    );
+
+    setTasks([...filterTask]);
+  }
+
   return (
     <>
       <section className="mb-20" id="tasks">
@@ -75,7 +88,7 @@ export default function Fulltable() {
         )}
         <div className="container">
           {/* Search Box */}
-          <SearchTask></SearchTask>
+          <SearchTask onSearch={handleSearch}></SearchTask>
           {/* Search Box Ends */}
           <div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#1D212B] px-6 py-8 md:px-9 md:py-16">
             <TaskAction

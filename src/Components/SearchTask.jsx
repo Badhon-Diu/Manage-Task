@@ -1,4 +1,17 @@
-export default function SearchTask() {
+import { useState } from "react";
+
+export default function SearchTask({ onSearch }) {
+  const [searchTerm, setsearchTerm] = useState("");
+  function handleOnsearch(value) {
+    setsearchTerm(value);
+    //e.target.name = e.target.value;
+    console.log(searchTerm);
+  }
+
+  function handleClick(event) {
+    event.preventDefault();
+    onSearch(searchTerm);
+  }
   return (
     <>
       <div className="p-2 flex justify-end">
@@ -6,6 +19,8 @@ export default function SearchTask() {
           <div className="flex">
             <div className="relative overflow-hidden rounded-lg text-gray-50 md:min-w-[380px] lg:min-w-[440px]">
               <input
+                onChange={() => handleOnsearch(event.target.value)}
+                value={searchTerm}
                 type="search"
                 id="search-dropdown"
                 className="z-20 block w-full bg-gray-800 px-4 py-2 pr-10 focus:outline-none"
@@ -14,7 +29,8 @@ export default function SearchTask() {
               />
               <button
                 type="submit"
-                className="absolute right-2 top-0 h-full rounded-e-lg text-white md:right-4"
+                className="absolute cursor-pointer right-2 top-0 h-full rounded-e-lg text-white md:right-4"
+                onClick={handleClick}
               >
                 <svg
                   className="h-4 w-4"
