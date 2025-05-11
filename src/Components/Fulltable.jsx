@@ -3,6 +3,7 @@ import AddTaskModal from "./AddTaskModal";
 import SearchTask from "./SearchTask";
 import TaskAction from "./TaskAction";
 import TaskList from "./TaskList";
+import NoTaskFOund from "./NoTaskFOund";
 export default function Fulltable() {
   const defaultTask = {
     id: crypto.randomUUID(),
@@ -95,12 +96,16 @@ export default function Fulltable() {
               onDeleteaAllClick={handleDeleteAll}
               handleaddtask={handleaddtask}
             ></TaskAction>
-            <TaskList
-              onFav={handleFav}
-              onDelete={handleDeleteTask}
-              onEdit={handleEditTask}
-              tasks={tasks}
-            ></TaskList>
+            {tasks.length > 1 ? (
+              <TaskList
+                onFav={handleFav}
+                onDelete={handleDeleteTask}
+                onEdit={handleEditTask}
+                tasks={tasks}
+              ></TaskList>
+            ) : (
+              <NoTaskFOund></NoTaskFOund>
+            )}
           </div>
         </div>
       </section>
