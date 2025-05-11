@@ -9,6 +9,7 @@ export default function Mainlayout() {
 
       <Hero></Hero>
       <Fulltable></Fulltable>
+
       <Footer></Footer>
     </>
   );

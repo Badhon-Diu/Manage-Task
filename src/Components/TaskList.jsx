@@ -1,7 +1,7 @@
 import { MdOutlineStarBorder, MdOutlineStarPurple500 } from "react-icons/md";
 
 export default function TaskList({ tasks }) {
-  console.log(tasks[0].isFavorite);
+
   return (
     <>
       <div className="overflow-auto">
@@ -39,7 +39,7 @@ export default function TaskList({ tasks }) {
               >
                 <td>
                   {task.isFavorite ? (
-                    <MdOutlineStarPurple500 />
+                    <MdOutlineStarPurple500 color="yellow" />
                   ) : (
                     <MdOutlineStarBorder />
                   )}
@@ -50,8 +50,8 @@ export default function TaskList({ tasks }) {
                 </td>
                 <td>
                   <ul className="flex justify-center gap-1.5 flex-wrap">
-                    {task.tags.map((tag) => (
-                      <li>
+                    {task.tags.map((tag, index) => (
+                      <li key={index}>
                         <span className="inline-block h-5 whitespace-nowrap rounded-[45px] bg-[#00D991A1] px-2.5 text-sm capitalize text-[#F4F5F6]">
                           {tag}
                         </span>
