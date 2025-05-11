@@ -1,7 +1,6 @@
 import { MdOutlineStarBorder, MdOutlineStarPurple500 } from "react-icons/md";
 
-export default function TaskList({ tasks }) {
-
+export default function TaskList({ onFav, tasks, onEdit, onDelete }) {
   return (
     <>
       <div className="overflow-auto">
@@ -37,13 +36,15 @@ export default function TaskList({ tasks }) {
                 key={task.id}
                 className="border-b border-[#2E3443] [&>td]:align-baseline [&>td]:px-4 [&>td]:py-2"
               >
-                <td>
-                  {task.isFavorite ? (
-                    <MdOutlineStarPurple500 color="yellow" />
-                  ) : (
-                    <MdOutlineStarBorder />
-                  )}
-                </td>
+                <button onClick={() => onFav(task.id)}>
+                  <td className="cursor-pointer ">
+                    {task.isFavorite ? (
+                      <MdOutlineStarPurple500 color="yellow" />
+                    ) : (
+                      <MdOutlineStarBorder />
+                    )}
+                  </td>
+                </button>
                 <td>{task.title}</td>
                 <td>
                   <div>{task.description}</div>
@@ -62,8 +63,18 @@ export default function TaskList({ tasks }) {
                 <td className="text-center">{task.priority}</td>
                 <td>
                   <div className="flex items-center justify-center space-x-3">
-                    <button className="text-red-500">Delete</button>
-                    <button className="text-blue-500">Edit</button>
+                    <button
+                      onClick={() => onDelete(task.id)}
+                      className="text-red-500"
+                    >
+                      Delete
+                    </button>
+                    <button
+                      onClick={() => onEdit(task)}
+                      className="text-blue-500"
+                    >
+                      Edit
+                    </button>
                   </div>
                 </td>
               </tr>
